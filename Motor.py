@@ -26,8 +26,14 @@ class Motor:
         self.DIR_RIGHT.value = True
         self.DIR_LEFT.value = True
 
-    def _move(self):
-        for _ in range(self.steps):
+    def _move(self, steps=None):
+
+        if not steps:
+            steps = self.steps
+        else:
+            steps = steps * self.microMode
+
+        for _ in range(steps):
             self.STEP_LEFT.value = True
             self.STEP_RIGHT.value = True
             time.sleep(0.001)
@@ -44,20 +50,20 @@ class Motor:
         self.DIR_RIGHT.value = True
         self.DIR_LEFT.value = True
         time.sleep(0.05)
-        self.move()
+        self._move(1)
 
     def reverse(self):
         self.DIR_RIGHT.value = False
         self.DIR_LEFT.value = False
         time.sleep(0.05)
-        self.move()
+        self._move(0.5)
 
     def tank_left(self):
         self.DIR_RIGHT.value = True
         self.DIR_LEFT.value = False
-        self.move()
+        self._move(1)
 
     def tank_right(self):
         self.DIR_RIGHT.value = False
         self.DIR_LEFT.value = True
-        self.move()
+        self._move(1)

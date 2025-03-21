@@ -21,10 +21,10 @@ class ForceSensor:
             sum += self.fsr.value
             time.sleep(0.05 / self.num)
 
-        return function(sum / self.num / 64)
+        return self._calibrate(sum / self.num / 64)
     
     def interrupt(self):
-        mass_grams = self.read_force()
+        mass_grams = self._read_force()
         if (mass_grams < self.threshold):
             return False
         else:
