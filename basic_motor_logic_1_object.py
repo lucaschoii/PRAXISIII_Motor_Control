@@ -1,16 +1,7 @@
-import time
-import board
-from digitalio import DigitalInOut, Direction
-import analogio
-import math
 from Motor import Motor
 from ForceSensor import ForceSensor
 
 operation_stack = []
-# RR = reverse
-# L = left
-# R = right
-# F = forward
     
 motor = Motor()
 force_sensor = ForceSensor()

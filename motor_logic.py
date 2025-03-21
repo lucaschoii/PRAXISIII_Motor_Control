@@ -1,8 +1,3 @@
-import time
-import board
-from digitalio import DigitalInOut, Direction
-import analogio
-import math
 from Motor import Motor
 from ForceSensor import ForceSensor
 

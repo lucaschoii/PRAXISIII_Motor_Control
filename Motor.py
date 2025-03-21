@@ -1,8 +1,6 @@
 import time
 import board
 from digitalio import DigitalInOut, Direction
-import analogio
-import math
 
 class Motor:
     def __init__(self):
