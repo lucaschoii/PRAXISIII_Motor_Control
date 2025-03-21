@@ -7,20 +7,25 @@ from Motor import Motor
 from ForceSensor import ForceSensor
 
 operation_stack = []
+# RR = reverse
+# L = left
+# R = right
+# F = forward
     
 motor = Motor()
 force_sensor = ForceSensor()
 
 
 while True:
-    mass_grams = force_sensor.read_force()
-
-    print(mass_grams)
-    if (mass_grams < 500):
+    
+    if (not force_sensor.interrupt()):
         motor.move()
 
     else:
+        
         print('Too heavy, avoiding object...')
+
+        operation_stack.append('RR')
         motor.reverse()   
         motor.tank_right()
         motor.forward()
@@ -30,6 +35,8 @@ while True:
         motor.forward()
         motor.tank_right()
         motor.forward()
+
+        
         
 
 

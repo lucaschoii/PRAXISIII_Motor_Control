@@ -5,9 +5,10 @@ import analogio
 import math
 
 class ForceSensor:
-    def __init__(self, num = 10):
-        fsr = analogio.AnalogIn(board.A2)  # GP28 = A2 in CircuitPython
+    def __init__(self, threshold = 500, num = 10):
+        self.fsr = analogio.AnalogIn(board.A2)  # GP28 = A2 in CircuitPython
         self.num = num
+        self.threshold = threshold
 
     def calibrate(self, x):
         return 1.7321 * math.exp(0.0524 * x + 4.1219) - 127.227
@@ -21,3 +22,10 @@ class ForceSensor:
             time.sleep(0.05 / self.num)
 
         return function(sum / self.num / 64)
+    
+    def interrupt(self):
+        mass_grams = self.read_force()
+        if (mass_grams < self.threshold):
+            return False
+        else:
+            return True
