@@ -10,10 +10,10 @@ class ForceSensor:
         self.num = num
         self.threshold = threshold
 
-    def calibrate(self, x):
+    def _calibrate(self, x):
         return 1.7321 * math.exp(0.0524 * x + 4.1219) - 127.227
     
-    def read_force(self):
+    def _read_force(self):
         sum = 0
 
         # take average of {{ num }} readings over 1 second

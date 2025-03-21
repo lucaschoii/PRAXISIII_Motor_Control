@@ -26,7 +26,7 @@ class Motor:
         self.DIR_RIGHT.value = True
         self.DIR_LEFT.value = True
 
-    def move(self):
+    def _move(self):
         for _ in range(self.steps):
             self.STEP_LEFT.value = True
             self.STEP_RIGHT.value = True
