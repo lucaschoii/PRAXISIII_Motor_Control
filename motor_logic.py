@@ -12,12 +12,14 @@ force_sensor = ForceSensor()
 obstacles = []
 
 
-def hit(action):
-    action()
+def hit(action, times = 1):
 
-    if force_sensor.interrupt():
-        print("New obstacle detected!")
-        return True 
+    for _ in range(times):
+        action()
+
+        if force_sensor.interrupt():
+            print("New obstacle detected!")
+            return True 
      
     return False  
 
@@ -37,8 +39,16 @@ while True:
             if hit(motor.forward): 
                 obstacles.append('object')
                 continue
-            if hit(motor.tank_left): continue
-            if hit(motor.forward): continue
+            motor.tank_left()
+            if hit(motor.forward, 2):
+                obstacles.append('fence')
+                continue
+            motor.tank_left()
+            if hit(motor.forward):
+                motor.tank_right()
+                continue
+            motor.tank_right()
+
         
         elif obstacles[-1] == 'object':
             print("Second obstacle detected! Adjusting route...")
@@ -50,16 +60,22 @@ while True:
             # have gotten here in the first place skull emoji
             motor.forward()
             motor.tank_left()
-            if hit(motor.forward): 
-                obstacles.append('fence')
+
+            # if hit, this is likely a corner and we should just go back the other way
+            if hit(motor.forward, 2): 
+                obstacles.clear()
+                motor.tank_right()
                 continue
             motor.tank_left()
-            if hit(motor.forward): 
+
+            
+            if hit(motor.forward, 2): 
                 obstacles.append('fence')
                 continue
+
             motor.tank_left()
             if hit(motor.forward): 
-                obstacles.append('fence')
+                motor.tank_right()
                 continue
 
             # at this point, we have cleared the latest object
