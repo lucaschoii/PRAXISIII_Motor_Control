@@ -22,7 +22,7 @@ def hit(action, times = 1):
 while True:
     
     if (not force_sensor.interrupt()):
-        motor.move()
+        motor.forward()
 
     else:
         
