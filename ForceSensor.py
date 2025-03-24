@@ -15,8 +15,8 @@ class ForceSensor:
     def _read_force(self):
         sum = 0
 
-        # take average of {{ num }} readings over 1 second
-        for i in range(self.num):
+        # take average of {{ num }} readings over ~0.05 seconds
+        for _ in range(self.num):
             sum += self.fsr.value
             time.sleep(0.05 / self.num)
 

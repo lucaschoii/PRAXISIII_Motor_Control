@@ -53,22 +53,22 @@ class Motor:
 
     def forward(self):
         self.DIR_RIGHT.value = True
-        self.DIR_LEFT.value = True
+        self.DIR_LEFT.value = False
         time.sleep(0.05)
         self._move(self.step_dict['forward'])
 
     def reverse(self):
         self.DIR_RIGHT.value = False
-        self.DIR_LEFT.value = False
+        self.DIR_LEFT.value = True
         time.sleep(0.05)
         self._move(self.step_dict['reverse'])
 
     def tank_left(self):
         self.DIR_RIGHT.value = True
-        self.DIR_LEFT.value = False
+        self.DIR_LEFT.value = True
         self._move(self.step_dict['tank_left'])
 
     def tank_right(self):
         self.DIR_RIGHT.value = False
-        self.DIR_LEFT.value = True
+        self.DIR_LEFT.value = False
         self._move(self.step_dict['tank_right'])
