@@ -2,7 +2,7 @@ from Motor import Motor
 from ForceSensor import ForceSensor
 
 motor = Motor()
-force_sensor = ForceSensor()
+force_sensor = ForceSensor(threshold=200)
 
 obstacles = []
 
